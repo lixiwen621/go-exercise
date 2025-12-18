@@ -11,6 +11,5 @@ func main() {
 	fmt.Println(str2, err2)
 	str3, err3 := Func3(1, 2)
 	fmt.Println(str3, err3)
-	str4 := Func4()
-	fmt.Println(str4)
+	Func4()
 }
