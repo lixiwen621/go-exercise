@@ -147,19 +147,19 @@ func method8() {
 	// after set position 0, s2 = [1024 2 0 4]
 
 	appendInFunc1(s)
-	fmt.Println("after append in func, s =", s)
-	// after append in func, s = [1024 2 512]
-	fmt.Println("after append in func, s2 =", s2)
-	// after append in func, s2 = [1024 2 512 1022]
+	fmt.Println("after append in funcs, s =", s)
+	// after append in funcs, s = [1024 2 512]
+	fmt.Println("after append in funcs, s2 =", s2)
+	// after append in funcs, s2 = [1024 2 512 1022]
 }
 
 func appendInFunc1(param []int) {
 	param = append(param, 1022)
-	fmt.Println("in func, param =", param)
-	// in func, param = [1024 2 0 1022]
+	fmt.Println("in funcs, param =", param)
+	// in funcs, param = [1024 2 0 1022]
 	param[2] = 512
-	fmt.Println("set position 2 in func, param =", param)
-	// set position 2 in func, param = [1024 2 512 1022]
+	fmt.Println("set position 2 in funcs, param =", param)
+	// set position 2 in funcs, param = [1024 2 512 1022]
 }
 
 // 使用 append 函数触发了扩容
@@ -188,18 +188,18 @@ func method9() {
 	// after set position 0, s2 = [0 0 4]
 
 	appendInFunc(s2)
-	fmt.Println("after append in func, s2 =", s2)
-	// after append in func, s2 = [0 0 4]
+	fmt.Println("after append in funcs, s2 =", s2)
+	// after append in funcs, s2 = [0 0 4]
 }
 
 func appendInFunc(param []int) {
 	param1 := append(param, 511)
 	param2 := append(param1, 512)
-	fmt.Println("in func, param1 =", param1)
-	// in func, param1 = [0 0 4 511]
+	fmt.Println("in funcs, param1 =", param1)
+	// in funcs, param1 = [0 0 4 511]
 	param2[2] = 500
-	fmt.Println("set position 2 in func, param2 =", param2)
-	// set position 2 in func, param2 = [0 0 500 511 512]
+	fmt.Println("set position 2 in funcs, param2 =", param2)
+	// set position 2 in funcs, param2 = [0 0 500 511 512]
 }
 
 func Method10() {

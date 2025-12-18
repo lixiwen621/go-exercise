@@ -1,4 +1,4 @@
-package _func
+package main
 
 import "fmt"
 
@@ -17,7 +17,7 @@ func (a *A) add(v int) int {
 	return a.i
 }
 
-func main() {
+func mainExample() {
 	// 声明函数变量
 	var function1 func(int, int) int
 

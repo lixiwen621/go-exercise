@@ -1,8 +1,8 @@
 package pkg1
 
 import (
-	_ "exercise/pkg2"
 	"fmt"
+	_ "github.com/lixiwen621/go-exercise/pkg2"
 )
 
 const PkgName string = "pkg1"

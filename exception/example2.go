@@ -7,7 +7,7 @@ func mayPanic() {
 }
 
 func main() {
-	//defer func() {
+	//defer funcs() {
 	//	if err := recover(); err != nil {
 	//		fmt.Println("捕获到 panic:", err)
 	//	}

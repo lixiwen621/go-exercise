@@ -128,7 +128,7 @@ func method5() {
 }
 
 func receiveMap(param map[string]int) {
-	fmt.Println("before modify, in receiveMap func: param[\"a\"] = ", param["a"])
+	fmt.Println("before modify, in receiveMap funcs: param[\"a\"] = ", param["a"])
 	param["a"] = 2
 	param["b"] = 3
 }

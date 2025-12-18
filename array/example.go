@@ -135,9 +135,9 @@ var carr [5]*Custom = [5]*Custom{
 //   - 函数内部修改的是副本，不会影响原数组；
 //   - 如果数组很大，性能上不如传指针。
 func receiveArray(param [5]int) {
-	fmt.Println("in receiveArray func, before modify, param = ", param)
+	fmt.Println("in receiveArray funcs, before modify, param = ", param)
 	param[1] = -5
-	fmt.Println("in receiveArray func, after modify, param = ", param)
+	fmt.Println("in receiveArray funcs, after modify, param = ", param)
 }
 
 // 值类型
@@ -146,9 +146,9 @@ func receiveArray(param [5]int) {
 //   - 函数内操作的是数组本体；
 //   - 修改会影响原数组。
 func receiveArrayPointer(param *[5]int) {
-	fmt.Println("in receiveArrayPointer func, before modify, param = ", param)
+	fmt.Println("in receiveArrayPointer funcs, before modify, param = ", param)
 	param[1] = -5
-	fmt.Println("in receiveArrayPointer func, after modify, param = ", param)
+	fmt.Println("in receiveArrayPointer funcs, after modify, param = ", param)
 }
 
 // 值传递数组（指针元素）
@@ -158,6 +158,6 @@ func receiveArrayPointer(param *[5]int) {
 //   - 修改数组结构本身（比如替换某个指针地址）不会影响原数组。
 func printFuncParamPointer(param [5]*Custom) {
 	for i := range param {
-		fmt.Printf("in printFuncParamPointer func, param[%d] = %p, value = %v \n", i, &param[i], *param[i])
+		fmt.Printf("in printFuncParamPointer funcs, param[%d] = %p, value = %v \n", i, &param[i], *param[i])
 	}
 }
