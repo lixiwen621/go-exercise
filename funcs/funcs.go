@@ -1,23 +1,25 @@
 package main
 
-// Func0 单一返回值
+import "fmt"
+
+// Func0 单一返回值, 返回 hello, world
 func Func0(name string) string {
 	return "hello, world"
 }
 
-// Func1 多个返回值
+// Func1 多个返回值，返回 "", nil
 func Func1(a, b, c int, str1 string) (string, error) {
 	return "", nil
 }
 
-// Func2 带名字的返回值
+// Func2 带名字的返回值，返回hello <nil>
 func Func2(a int, b int) (str string, err error) {
 	str = "hello"
 	// 带名字的返回值，可以直接 return
 	return
 }
 
-// Func3 带名字的返回值
+// Func3 带名字的返回值，返回 hello nil
 func Func3(a int, b int) (str string, err error) {
 	res := "hello"
 	// 虽然带名字，但是我们并没有用
@@ -48,9 +50,65 @@ func Recursive() {
 	Recursive()
 }
 
+// Func4 演示了 Go 中函数作为一等公民（first-class citizen）的用法：函数可以像普通值一样被赋值、传递和存储。
 func Func4() {
+	// 直接调用
+	result, err := Func3(1, 2)
+	// 赋值后调用（效果相同）
 	myFunc3 := Func3
-	_, _ = myFunc3(1, 2)
+	result2, err2 := myFunc3(1, 2)
+	fmt.Println(result, err)
+	fmt.Println(result2, err2)
+}
+
+// 也是一等公民的特性
+func Func41() {
+	var f func(int, int) int
+	f = func(x, y int) int {
+		return x + y
+	}
+	fmt.Println(f(2, 3)) // 输出 5
+
+	// 实际应用 这种模式常用于：
+	// 回调函数
+	// 策略模式（根据不同条件选择不同算法）
+	//函数式编程（map、filter、reduce 等操作）
+	// 例如，可以动态选择不同的计算方式
+	var calculator func(int, int) int
+	operation := "add" // 定义 operation 变量
+
+	if operation == "add" {
+		calculator = func(x, y int) int { return x + y }
+	} else if operation == "multiply" {
+		calculator = func(x, y int) int { return x * y }
+	}
+
+	result := calculator(2, 3)
+	fmt.Println(result) // 使用 result 变量
+}
+
+// 这是一个高阶函数（Higher-Order Function）示例：函数作为参数传递
+func operate(x, y int, op func(int, int) int) int {
+	return op(x, y)
+}
+
+// 也是一等公民的特性
+// 调用上面的 operate 方法示例
+func Fun42() {
+	// 示例 1: 传入加法函数
+	add := func(x, y int) int { return x + y }
+	result1 := operate(3, 4, add) // 结果: 7
+	fmt.Println(result1)
+	// 示例 2: 传入乘法函数
+	multiply := func(x, y int) int { return x * y }
+	result2 := operate(3, 4, multiply) // 结果: 12
+	fmt.Println(result2)
+	// 示例 3: 直接传入匿名函数
+	result3 := operate(10, 5, func(x, y int) int { return x - y }) // 结果: 5
+	fmt.Println(result3)
+	// 示例 4: 传入除法函数
+	result4 := operate(10, 2, func(x, y int) int { return x / y }) // 结果: 5
+	fmt.Println(result4)
 }
 
 func Func5() {
