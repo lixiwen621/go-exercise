@@ -45,7 +45,7 @@ func Invoke() {
 }
 
 // Recursive 递归
-// 这个方法运行的时候会出现错误
+// 递归使用不当, 就有可能出现 stack overflow
 func Recursive() {
 	Recursive()
 }
@@ -62,6 +62,7 @@ func Func4() {
 }
 
 // 也是一等公民的特性
+// 函数变量
 func Func41() {
 	var f func(int, int) int
 	f = func(x, y int) int {
@@ -94,6 +95,7 @@ func operate(x, y int, op func(int, int) int) int {
 
 // 也是一等公民的特性
 // 调用上面的 operate 方法示例
+// 函数作为参数
 func Fun42() {
 	// 示例 1: 传入加法函数
 	add := func(x, y int) int { return x + y }
@@ -111,12 +113,27 @@ func Fun42() {
 	fmt.Println(result4)
 }
 
+// 函数作为返回值
+func getAdder(base int) func(int) int {
+	return func(v int) int {
+		return base + v
+	}
+}
+
+func Func43() {
+	adder := getAdder(10)
+	fmt.Println(adder(1)) // 输出 11
+	fmt.Println(adder(2)) // 输出 13
+	fmt.Println(adder(3)) // 输出 16
+}
+
 func Func5() {
 	fn := func(name string) string {
 		return "hello, " + name
 	}
 
-	fn("大明")
+	str := fn("大明")
+	fmt.Println(str)
 }
 
 // Func6 的返回值是一个方法，
@@ -140,6 +157,7 @@ func Func7() {
 	println(hello)
 }
 
+// 闭包
 func Closure(name string) func() string {
 
 	// 返回的这个函数，就是一个闭包。
