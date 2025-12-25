@@ -114,6 +114,7 @@ func Fun42() {
 }
 
 // 函数作为返回值
+// 也可以称为闭包
 func getAdder(base int) func(int) int {
 	return func(v int) int {
 		return base + v
@@ -181,6 +182,8 @@ func YourNameInvoke() {
 	YourName("Deng Ming", "Da Ming", "Zhong Ming")
 }
 
+// 第二个 defer 会先执行
+// 因为 defer 是后进先出（LIFO）的
 func Defer() {
 	defer func() {
 		println("第一个 defer")
@@ -191,6 +194,10 @@ func Defer() {
 	}()
 }
 
+// hello, world
+// hello, world
+// hello, world
+// ... (重复 100 次)
 func DeferNum() {
 	for i := 0; i < 100; i++ {
 		defer func() {
@@ -225,6 +232,10 @@ func DeferConditional(input bool) {
 	}
 }
 
+// 输出1
+// i := 0：初始化 i 为 0
+// defer func() { println(i) }()：注册 defer，闭包捕获变量 i 的引用（不是值）
+// i = 1：将 i 修改为 1
 func DeferClosure() {
 	i := 0
 	defer func() {
@@ -233,6 +244,10 @@ func DeferClosure() {
 	i = 1
 }
 
+// 输出 0
+// i := 0：初始化 i 为 0
+// 参数 (i) 在注册时立即求值，此时 i = 0，所以 val = 0
+// i = 1：修改 i 为 1（不影响已传递的 val）
 func DeferClosureV1() {
 	i := 0
 	defer func(val int) {
@@ -241,6 +256,10 @@ func DeferClosureV1() {
 	i = 1
 }
 
+// 输出10个10
+// 每次循环注册一个 defer，闭包捕获变量 i 的引用
+// 所有 defer 中的闭包都引用同一个变量 i
+// 循环结束后，i 的值是 10（因为循环条件是 i < 10，当 i=10 时循环结束）
 func DeferClosureLoopV1() {
 	for i := 0; i < 10; i++ {
 		defer func() {
@@ -249,6 +268,9 @@ func DeferClosureLoopV1() {
 	}
 }
 
+// DeferClosureLoopV2: 参数传递值，输出 9,8,7,...,0
+// val 是 i 的值的副本
+// 立即求值，每次循环传递不同的值
 func DeferClosureLoopV2() {
 	for i := 0; i < 10; i++ {
 		defer func(val int) {
@@ -257,6 +279,9 @@ func DeferClosureLoopV2() {
 	}
 }
 
+// 输出: 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+// 每次循环创建新的变量 j
+// 每个闭包捕获不同的 j
 func DeferClosureLoopV3() {
 	for i := 0; i < 10; i++ {
 		j := i
@@ -266,6 +291,12 @@ func DeferClosureLoopV3() {
 	}
 }
 
+// 返回值 0
+// 非命名返回值：返回值是匿名变量，defer 修改局部变量不影响返回值
+// return a 的执行步骤：
+// 步骤1：计算返回值，将 a 的值（0）复制到返回值
+// 步骤2：执行 defer，将局部变量 a 修改为 1
+// 步骤3：函数返回，返回值为 0
 func DeferReturn() int {
 	a := 0
 	defer func() {
@@ -274,6 +305,15 @@ func DeferReturn() int {
 	return a
 }
 
+// 返回值 1
+// 命名返回值：a 是返回值变量，defer 可以直接修改它
+// 执行流程：
+// (a int)：声明命名返回值变量 a
+// a = 0：将返回值变量 a 设为 0
+// defer func() { a = 1 }()：注册 defer，闭包捕获返回值变量 a 的引用
+// return a：返回命名返回值变量 a（此时仍为 0）
+// 执行 defer：将返回值变量 a 修改为 1
+// 函数返回：返回值为 1
 func DeferReturnV1() (a int) {
 	a = 0
 	defer func() {
