@@ -294,9 +294,9 @@ func DeferClosureLoopV3() {
 // 返回值 0
 // 非命名返回值：返回值是匿名变量，defer 修改局部变量不影响返回值
 // return a 的执行步骤：
-// 步骤1：计算返回值，将 a 的值（0）复制到返回值
-// 步骤2：执行 defer，将局部变量 a 修改为 1
-// 步骤3：函数返回，返回值为 0
+// 步骤1：计算返回值，将 a 的值（0）复制到返回值  a 是局部变量
+// 步骤2：执行 defer，将局部变量 a 修改为 1, 但是修改局部变量，不影响返回值
+// 步骤3：函数返回，返回值为 0  先复制 a 的值(0)到返回值，再执行 defer
 func DeferReturn() int {
 	a := 0
 	defer func() {
@@ -322,6 +322,15 @@ func DeferReturnV1() (a int) {
 	return a
 }
 
+// 返回值 &{Tom}
+// 返回值是一个指针，defer 可以修改指针指向的值
+// 执行流程：
+// (a *MyStruct)：声明返回值变量 a 为指针类型
+// a = &MyStruct{name: "Jerry"}：将返回值变量 a 设为指针，指向 MyStruct 结构体
+// defer func() { a.name = "Tom" }()：注册 defer，闭包捕获指针 a 的引用
+// return a：返回指针 a（此时指向 MyStruct{name: "Tom"}）
+// 函数返回：返回值为 &{Tom}
+// 注意：这里返回的是指针，所以返回值是 &{Tom}，而不是 {Tom}
 func DeferReturnV2() *MyStruct {
 	a := &MyStruct{
 		name: "Jerry",
