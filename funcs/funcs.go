@@ -121,6 +121,12 @@ func getAdder(base int) func(int) int {
 	}
 }
 
+func getAdder2(base int) func(int) int {
+	return func(v int) int {
+		return base + v
+	}
+}
+
 func Func43() {
 	adder := getAdder(10)
 	fmt.Println(adder(1)) // 输出 11
@@ -302,6 +308,7 @@ func DeferReturn() int {
 	defer func() {
 		a = 1
 	}()
+	a = 2 // 如果加个 a=2, 那么返回值就是 2
 	return a
 }
 
@@ -319,6 +326,7 @@ func DeferReturnV1() (a int) {
 	defer func() {
 		a = 1
 	}()
+	a = 2 // 如果加个 a=2, 返回值还是 1
 	return a
 }
 
