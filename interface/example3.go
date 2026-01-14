@@ -1,4 +1,4 @@
-package _interface
+package main
 
 import "fmt"
 
@@ -20,18 +20,4 @@ func (stu *Student2) SayHello() {
 
 func (stu *Student2) Say() {
 	fmt.Println("你好")
-}
-
-func main() {
-	var stu Student2
-	var per Personer
-	per = &stu
-	per.Say()
-	per.SayHello()
-
-	var h Humaner
-	//h = per
-	// 这种是
-	per = h.(Personer)
-	h.SayHello()
 }

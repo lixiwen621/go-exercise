@@ -1,4 +1,4 @@
-package _interface
+package main
 
 import "fmt"
 
@@ -22,18 +22,4 @@ func (te *Teacher) SayHello() {
 
 func whoSayHello(p Person) {
 	p.SayHello()
-}
-
-func Main() {
-	var stu Student
-	var te Teacher
-	var person Person
-	var person2 Person
-	person = &stu
-	person.SayHello()
-	person2 = &te
-	person2.SayHello()
-
-	whoSayHello(&stu)
-	whoSayHello(&te)
 }
