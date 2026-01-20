@@ -68,3 +68,25 @@ func UseInt() {
 	fmt.Println(i2)
 	fmt.Println(i3)
 }
+
+// 结构体的衍生示例
+type Fish struct {
+	Name string
+}
+
+func (f Fish) Swim() {
+	fmt.Println("fist 在游")
+}
+
+type FakeFish Fish
+
+func UseFish() {
+	f1 := Fish{}
+	f2 := FakeFish(f1)
+	f1.Swim()
+	// f2 就没有Swim() 方法
+	//f2.Swim()
+	// 但是 f2 可以访问 Fish的字段
+	//f2.Name
+	fmt.Println(f2)
+}
