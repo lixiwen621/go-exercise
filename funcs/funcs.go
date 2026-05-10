@@ -12,7 +12,7 @@ func Func1(a, b, c int, str1 string) (string, error) {
 	return "", nil
 }
 
-// Func2 带名字的返回值，返回hello <nil>
+// Func2 带名字的返回值，返回hello <nil>，命名返回值
 func Func2(a int, b int) (str string, err error) {
 	str = "hello"
 	// 带名字的返回值，可以直接 return
@@ -318,7 +318,7 @@ func DeferReturn() int {
 // (a int)：声明命名返回值变量 a
 // a = 0：将返回值变量 a 设为 0
 // defer func() { a = 1 }()：注册 defer，闭包捕获返回值变量 a 的引用
-// return a：返回命名返回值变量 a（此时仍为 0）
+// return a：返回命名返回值变量 a（此时仍为 0），注意 return也在defer之前执行，defer在方法中最后执行
 // 执行 defer：将返回值变量 a 修改为 1
 // 函数返回：返回值为 1
 func DeferReturnV1() (a int) {

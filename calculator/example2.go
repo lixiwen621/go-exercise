@@ -180,7 +180,7 @@ func OperatorWho(r Resulter) int {
 func main() {
 	var operator OperatorFactory
 	obj := operator.CreateOperator("/")
-	b := obj.SetData(10, 0)
+	b := obj.SetData(10, 2)
 	if b {
 		num := OperatorWho(obj)
 		fmt.Println(num)

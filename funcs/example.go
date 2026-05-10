@@ -26,7 +26,7 @@ func mainExample() {
 		return a + b
 	}
 
-	fmt.Println(function1)
+	fmt.Printf("function1(3, 4) = %d\n", function1(3, 4))
 }
 
 // 声明闭包, 示例1

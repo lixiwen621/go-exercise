@@ -42,7 +42,7 @@ func (s *StudentInfo) getScore(chinese float64, math float64, english float64) {
 	// 2:进行计算
 	sum := s.chinese + s.math + s.english
 	// 3:打印输出结果
-	fmt.Print("我叫%s, 总分%f, 平均分%f", s.name, sum, sum/3)
+	fmt.Printf("我叫%s, 总分%f, 平均分%f\n", s.name, sum, sum/3)
 
 }
 

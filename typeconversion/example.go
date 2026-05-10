@@ -81,11 +81,11 @@ func method5() {
 	var i interface{} = 3
 	switch v := i.(type) {
 	case int:
-		fmt.Printf("i is a int \n", v)
+		fmt.Printf("i is a int: %v\n", v)
 	case string:
-		fmt.Printf("i is a string \n", v)
+		fmt.Printf("i is a string: %v\n", v)
 	default:
-		fmt.Printf("i is unknown type \n", v)
+		fmt.Printf("i is unknown type: %v\n", v)
 	}
 }
 

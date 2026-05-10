@@ -10,12 +10,12 @@ func method1() {
 	// range遍历字符串，str1[index] 打印的是 Unicode值
 	str1 := "abc123"
 	for index := range str1 {
-		fmt.Println("str1 -- index:%d, value:%d\n", index, str1[index])
+		fmt.Printf("str1 -- index:%d, value:%d\n", index, str1[index])
 	}
 
 	// 跟上面的打印是一样的, value可以直接打印出 index对应的值
 	for index, value := range str1 {
-		fmt.Println("str1 -- index:%d, value:%d\n", index, value)
+		fmt.Printf("str1 -- index:%d, value:%d\n", index, value)
 	}
 
 	str2 := "测试中文"

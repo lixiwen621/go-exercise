@@ -63,7 +63,7 @@ func method2() {
 
 	// range 迭代访问切片
 	for i, v := range s1 {
-		fmt.Println("before modify, s1[%d] = %d", i, v)
+		fmt.Printf("before modify, s1[%d] = %d\n", i, v)
 	}
 }
 

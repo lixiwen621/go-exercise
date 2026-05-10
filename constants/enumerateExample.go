@@ -9,7 +9,7 @@ const (
 	Female = "Female"
 )
 
-// 自定义类型 或者 类型别名
+// 自定义命名类型（与 string 不同，需显式转换才能与 string 互换）
 type Gender string
 
 const (
@@ -26,18 +26,24 @@ func method(gender Gender) {
 // 请注意 *Gender 是方法的接收者类型，后续在函数和方法的章节会介绍
 // *Gender类型是 指针
 func (g *Gender) String() string {
+	if g == nil {
+		return ""
+	}
 	switch *g {
-	case Male:
-		return "Male"
-	case Female:
-		return "Female"
+	case Male2:
+		return string(Male2)
+	case Female2:
+		return string(Female2)
 	default:
 		return "Unknown"
 	}
 }
 
 func (g *Gender) IsMale() bool {
-	return *g == Male
+	if g == nil {
+		return false
+	}
+	return *g == Male2
 }
 
 // iota关键字自动为常量赋值

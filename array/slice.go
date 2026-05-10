@@ -30,10 +30,10 @@ func SubSlice() {
 	s2 := s1[1:3]
 	fmt.Printf("s2: %v, len: %d, cap: %d \n", s2, len(s2), cap(s2))
 	// s1[2:] 从下标2开始(包括2)
-	s3 := s1[2:] // make 只传入一个参数，表示创建一个 4 个元素的切片
+	s3 := s1[2:]
 	fmt.Printf("s3: %v, len: %d, cap: %d \n", s3, len(s3), cap(s3))
 	// s1[:3] 从下标0开始 到 下标3(不包括下标3)
-	s4 := s1[:3] // make 只传入一个参数，表示创建一个 4 个元素的切片
+	s4 := s1[:3]
 	fmt.Printf("s4: %v, len: %d, cap: %d \n", s4, len(s4), cap(s4))
 }
 

@@ -30,13 +30,3 @@ func (i Inner) SayHello() {
 func (i Inner) Name() string {
 	return "Inner"
 }
-
-func main() {
-	in := Inner{}
-	in.DoSomething()
-
-	out := Outer{}
-	out.DoSomething()
-	// 会输出hello, inner
-	out.SayHello()
-}
