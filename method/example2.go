@@ -18,6 +18,24 @@ func (p *Person2) SetValue(userName string, userAge int, userSex string) {
 	p.sex = userSex
 }
 
+// TryRename 值接收者：p 是 Person2 的副本，函数里对字段的修改不会影响外部的嵌入字段。
+// 对比 SetValue 的 (*Person2) 指针接收者——那是改「同一块数据」。
+func (p Person2) TryRename(newName string) {
+	p.name = newName
+	p.age = 0
+}
+
+// ValueReceiverPractice 演示值接收者 vs 指针接收者对「是否能改原数据」的区别。
+func ValueReceiverPractice() {
+	var rep Reporter
+	rep.SetValue("张三", 20, "男")
+	fmt.Println("SetValue 后 name =", rep.name, "age =", rep.age)
+
+	// TryRename 会提升到 Reporter 上调用；接收者是 rep.Person2 的一份拷贝
+	rep.TryRename("改名失败示例")
+	fmt.Println("TryRename 后 name =", rep.name, "age =", rep.age, "（不变：改的是副本）")
+}
+
 // 3. 定义相应的子类
 // 记者类
 type Reporter struct {
@@ -51,4 +69,7 @@ func Main() {
 	var pro Programmer
 	pro.SetValue("李四", 28, "男")
 	pro.ProSayHello(3)
+
+	fmt.Println()
+	ValueReceiverPractice()
 }

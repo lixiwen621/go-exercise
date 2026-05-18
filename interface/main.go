@@ -9,4 +9,6 @@ func main() {
 	// 会输出hello, inner
 	out.SayHello()
 
+	ReceiverWithInterfaceDemo()
+	ReadWriterDemo()
 }

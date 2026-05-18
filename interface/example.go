@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -19,7 +20,7 @@ func (c Cat) Speak() string {
 }
 
 // golang中的接口可以隐式的实现
-func method1() {
+func method1(p Speaker) {
 	var s Speaker = Cat{}
 	fmt.Println(s.Speak())
 }
@@ -99,6 +100,47 @@ type Writer interface {
 type ReadWriter interface {
 	Reader
 	Writer
+}
+
+// readSink 只接受「读」侧能力：参数类型为 Reader，不关心对方是否还能 Write。
+func readSink(r Reader) {
+	buf := make([]byte, 64)
+	n, err := r.Read(buf)
+	fmt.Printf("[readSink] 读取 %d 字节: %q err=%v\n", n, buf[:n], err)
+}
+
+// writeSink 只接受「写」侧能力。
+func writeSink(w Writer) {
+	n, err := w.Write([]byte(" -> writeSink 写入\n"))
+	fmt.Printf("[writeSink] 写入 %d 字节 err=%v\n", n, err)
+}
+
+// ReadWriterDemo 演示接口组合：ReadWriter = Reader ∪ Writer。
+//
+// *bytes.Buffer 自带的 Read/Write 与上面 Reader、Writer 的方法签名一致，
+// 因此同时满足 Reader、Writer，自然也满足把它们嵌在一起的 ReadWriter。
+func ReadWriterDemo() {
+	buf := bytes.NewBuffer(nil)
+	var rw ReadWriter = buf
+
+	if _, err := rw.Write([]byte("Hello")); err != nil {
+		fmt.Println("Write:", err)
+		return
+	}
+	if _, err := rw.Write([]byte("，组合接口")); err != nil {
+		fmt.Println("Write:", err)
+		return
+	}
+
+	readBuf := make([]byte, 64)
+	n, err := rw.Read(readBuf)
+	fmt.Printf("[ReadWriter] 读取: %q (%d 字节) err=%v\n", readBuf[:n], n, err)
+
+	fmt.Println("--- 收窄：把 ReadWriter 传给只要 Reader 或只要 Writer 的函数 ---")
+	buf2 := bytes.NewBuffer([]byte("abc"))
+	var rw2 ReadWriter = buf2
+	writeSink(rw2)
+	readSink(rw2)
 }
 
 // 使用接口的相关示例

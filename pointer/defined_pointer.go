@@ -47,7 +47,3 @@ func method3() {
 	fmt.Println(*p2)
 	fmt.Println(**p3)
 }
-
-func main() {
-	method3()
-}
